@@ -1,6 +1,6 @@
 # Widget Dashboard
 
-Welcome to the Widget Dashboard project! This application allows users to manage and interact with widgets in a customizable dashboard.
+Welcome to the Widget Dashboard project! This application enables users to efficiently manage and interact with widgets within a customizable dashboard environment.
 
 ## Technologies Used
 
@@ -16,8 +16,8 @@ To get started with the Widget Dashboard project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/Jayanth9743/AccuKnox.git
-   cd Accuknox
+   git clone https://github.com/sreenidhi1712/AccuKnox.git
+   cd AccuKnox-Frontend-Trainee-Assessment
 
 2. **Install dependencies:**
 
