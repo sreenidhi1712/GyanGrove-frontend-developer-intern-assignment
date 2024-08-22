@@ -30,6 +30,7 @@ const Dashboard = () => {
     if (newCategory) {
       dispatch(addCategory(newCategory));
       setNewCategory("");
+      alert(`Category Added ${newCategory}`);
     }
   };
 
@@ -38,6 +39,7 @@ const Dashboard = () => {
       const widget = { id: Date.now(), ...newWidget };
       dispatch(addWidget({ category: selectedCategory, widget }));
       setNewWidget({ name: "", text: "" });
+      setOpenPopup(!openPopup);
     }
   };
 
@@ -47,8 +49,7 @@ const Dashboard = () => {
 
   const filteredWidgets = (category) => {
     if (!searchTerm) return categories[category];
-    return categories[category].filter((widget) =>
-      widget.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return categories[category].filter((widget) => widget.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 
@@ -67,6 +68,7 @@ const Dashboard = () => {
           value={searchTerm}
           onChange={handleSearch}
         />
+     
       </div>
 
       <div className="mb-4">
@@ -103,11 +105,11 @@ const Dashboard = () => {
             </button>
           </div>
           <div className="flex gap-5 flex-wrap ">
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               {filteredWidgets(category).map((widget) => (
                 <div
                   key={widget.id}
-                  className="border p-4 bg-white rounded-lg min-h-52 min-w-96 flex flex-col justify-center relative"
+                  className="border p-4 bg-white rounded-lg min-h-52 min-w-96 flex flex-col  justify-center relative"
                 >
                   <div className="">
                     <h4 className="font-bold absolute top-1">{widget.name}</h4>
