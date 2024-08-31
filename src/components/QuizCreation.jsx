@@ -9,7 +9,7 @@ const QuizCreation = () => {
 
   const navigate = useNavigate();
   const [quiz, setQuiz] = useState({
-    id: Date.now(),
+    id:'',
     name:'',
     questions: [
       {
@@ -88,7 +88,7 @@ const QuizCreation = () => {
         <input
           type="text"
           value={quiz.name}
-          onChange={(e) => setQuiz({ ...quiz, name: e.target.value })}
+          onChange={(e) => setQuiz({ ...quiz, name: e.target.value,id : `${e.target.value} ${Date.now()}` })}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
       </div>
