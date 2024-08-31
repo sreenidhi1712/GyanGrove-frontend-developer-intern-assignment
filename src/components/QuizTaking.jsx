@@ -1,4 +1,4 @@
-import  { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { addResponse } from '../store'; // Import the addResponse action
@@ -19,8 +19,10 @@ const QuizTaking = () => {
 
   const handleNextQuestion = useCallback(() => {
     if (!responses[currentQuestionIndex]) {
-      alert('You must select an option before moving to the next question. Once you move to the next question, you cannot go back.');
-      return;
+      setResponses({
+        ...responses,
+        [currentQuestionIndex]: 'unattended',
+      });
     }
     if (currentQuestionIndex < quiz.questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -28,8 +30,7 @@ const QuizTaking = () => {
     } else {
       handleSubmit();
     }
-  }, [responses, currentQuestionIndex, quiz.questions.length, handleSubmit]);
-
+  }, [quiz.questions, currentQuestionIndex, responses, handleSubmit]);
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -51,9 +52,6 @@ const QuizTaking = () => {
       [questionIndex]: option,
     });
   };
-
-  
-
 
   const currentQuestion = quiz.questions[currentQuestionIndex];
 

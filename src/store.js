@@ -1,16 +1,18 @@
 // src/store.js
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore, createSlice, current } from '@reduxjs/toolkit';
 import data from './Data.json'; // Import Data.json
+
+
 
 const initialState = {
   categories: data.categories, // Include categories from Data.json
   quizzes: data.categories.map(category => ({
-    id: category.id,
+    id: `${category.id} ${Date.now()}`, // Generate a unique ID for each quiz
     name: category.name,
     questions: category.questions
   })), // Transform categories into quizzes
   responses: {},
-  searchTerm: '',
+  users: [],
 };
 
 const widgetsSlice = createSlice({
@@ -19,6 +21,7 @@ const widgetsSlice = createSlice({
   reducers: {
     addQuiz: (state, action) => {
       state.quizzes.push(action.payload);
+      console.log(current(state));
     },
     updateQuiz: (state, action) => {
       const index = state.quizzes.findIndex(quiz => quiz.id === action.payload.id);
@@ -27,19 +30,17 @@ const widgetsSlice = createSlice({
       }
     },
     addResponse: (state, action) => {
-      const { quizId, responses } = action.payload;
-      state.responses[quizId] = responses;
-    },
-    addCategory: (state, action) => {
-      state.categories.push(action.payload);
+      state.responses[action.payload.quizId] = action.payload.responses;
     },
   },
 });
 
-export const { addQuiz, updateQuiz, addResponse ,addCategory} = widgetsSlice.actions;
+export const {  addQuiz, updateQuiz, addResponse, setSearchTerm } = widgetsSlice.actions;
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     widgets: widgetsSlice.reducer,
   },
 });
+
+export default store;

@@ -1,38 +1,48 @@
 import  { useState } from 'react';
-import {  useDispatch } from 'react-redux';
-import { addQuiz, addCategory } from '../store'; // Import the addQuiz and addCategory actions
+import { useDispatch } from 'react-redux';
+import {  addQuiz } from '../store';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const QuizCreation = () => {
-  const [quiz, setQuiz] = useState({ title: '', questions: [] });
+
+  const navigate = useNavigate();
+  const [quiz, setQuiz] = useState({
+    id: Date.now(),
+    name:'',
+    questions: [
+      {
+        question: '',
+        options: ['', '', '', ''],
+        correctOption: '',
+      },
+    ],
+  });
   const [validationMessages, setValidationMessages] = useState([]);
   const dispatch = useDispatch();
 
-  const handleAddQuestion = () => {
-    setQuiz({
-      ...quiz,
-      questions: [...quiz.questions, { question: '', options: ['', '', '', ''], correctOption: '' }],
-    });
-    setValidationMessages([...validationMessages, '']);
+  const handleQuestionChange = (index, field, value) => {
+    const newQuestions = [...quiz.questions];
+    newQuestions[index][field] = value;
+    setQuiz({ ...quiz, questions: newQuestions });
   };
 
   const handleOptionChange = (questionIndex, optionIndex, value) => {
-    const questions = [...quiz.questions];
-    questions[questionIndex].options[optionIndex] = value;
-    setQuiz({ ...quiz, questions });
-    validateQuestion(questionIndex);
+    const newQuestions = [...quiz.questions];
+    newQuestions[questionIndex].options[optionIndex] = value;
+    setQuiz({ ...quiz, questions: newQuestions });
   };
 
   const handleCorrectOptionChange = (questionIndex, value) => {
-    const questions = [...quiz.questions];
-    questions[questionIndex].correctOption = value;
-    setQuiz({ ...quiz, questions });
-    validateQuestion(questionIndex);
+    const newQuestions = [...quiz.questions];
+    newQuestions[questionIndex].correctOption = value;
+    setQuiz({ ...quiz, questions: newQuestions });
   };
 
-  const validateQuestion = (questionIndex) => {
-    const question = quiz.questions[questionIndex];
-    const uniqueOptions = new Set(question.options);
+  const validateQuestion = (question, questionIndex) => {
     let message = '';
+    const uniqueOptions = new Set(question.options);
 
     if (uniqueOptions.size !== question.options.length) {
       message = 'All options must be unique.';
@@ -46,14 +56,8 @@ const QuizCreation = () => {
   };
 
   const handleSaveQuiz = () => {
-    for (const question of quiz.questions) {
-      if (!question.options.includes(question.correctOption)) {
-        return;
-      }
-    }
-    const newCategory = { id: quiz.title, name: quiz.title };
-    dispatch(addCategory(newCategory));
-    dispatch(addQuiz({ ...quiz, category: newCategory.id }));
+    dispatch(addQuiz({  id: quiz.id, name: quiz.name , questions: quiz.questions }));
+    navigate('/');
   };
 
   const isSaveDisabled = quiz.questions.some((question) => {
@@ -64,58 +68,90 @@ const QuizCreation = () => {
     );
   });
 
+  const addQuestion = () => {
+    setQuiz({
+      ...quiz,
+      questions: [
+        ...quiz.questions,
+        { question: '', options: ['', '', '', ''], correctOption: '' },
+      ],
+    });
+  };
+
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Create Quiz</h2>
-      <input
-        type="text"
-        placeholder="Quiz Title"
-        value={quiz.title}
-        onChange={(e) => setQuiz({ ...quiz, title: e.target.value })}
-        className="border p-2 mb-4 w-full"
-      />
-      {quiz.questions.map((q, index) => (
-        <div key={index} className="mb-4">
+      <h2 className="text-2xl font-bold mb-4">Create a New Quiz</h2>
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Quiz Title
+        </label>
+        <input
+          type="text"
+          value={quiz.name}
+          onChange={(e) => setQuiz({ ...quiz, name: e.target.value })}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      {quiz.questions.map((question, questionIndex) => (
+        <div key={questionIndex} className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Question {questionIndex + 1}
+          </label>
           <input
             type="text"
-            placeholder="Question"
-            value={q.question}
-            onChange={(e) => {
-              const questions = [...quiz.questions];
-              questions[index].question = e.target.value;
-              setQuiz({ ...quiz, questions });
-            }}
-            className="border p-2 mb-2 w-full"
+            value={question.question}
+            onChange={(e) =>
+              handleQuestionChange(questionIndex, 'question', e.target.value)
+            }
+            onBlur={() => validateQuestion(question, questionIndex)}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
-          {q.options.map((option, optionIndex) => (
-            <input
-              key={optionIndex}
-              type="text"
-              placeholder={`Option ${optionIndex + 1}`}
-              value={option}
-              onChange={(e) => handleOptionChange(index, optionIndex, e.target.value)}
-              className="border p-2 mb-2 w-full"
-            />
+          {question.options.map((option, optionIndex) => (
+            <div key={optionIndex} className="mt-2">
+              <input
+                type="text"
+                value={option}
+                onChange={(e) =>
+                  handleOptionChange(questionIndex, optionIndex, e.target.value)
+                }
+                onBlur={() => validateQuestion(question, questionIndex)}
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
           ))}
-          <input
-            type="text"
-            placeholder="Correct Answer"
-            value={q.correctOption}
-            onChange={(e) => handleCorrectOptionChange(index, e.target.value)}
-            className="border p-2 mb-2 w-full"
-          />
-          {validationMessages[index] && (
-            <p className="text-red-500">{validationMessages[index]}</p>
+          <div className="mt-2">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Correct Option
+            </label>
+            <input
+              type="text"
+              value={question.correctOption}
+              onChange={(e) =>
+                handleCorrectOptionChange(questionIndex, e.target.value)
+              }
+              onBlur={() => validateQuestion(question, questionIndex)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          {validationMessages[questionIndex] && (
+            <p className="text-red-500 text-xs italic">
+              {validationMessages[questionIndex]}
+            </p>
           )}
         </div>
       ))}
-      <button onClick={handleAddQuestion} className="bg-blue-500 text-white p-2 rounded mr-2">
+      <button
+        onClick={addQuestion}
+        className="bg-blue-500 text-white p-2 rounded mb-4"
+      >
         Add Question
       </button>
       <button
         onClick={handleSaveQuiz}
-        className="bg-green-500 text-white p-2 rounded"
         disabled={isSaveDisabled}
+        className={`bg-green-500 text-white p-2 rounded ${
+          isSaveDisabled ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         Save Quiz
       </button>

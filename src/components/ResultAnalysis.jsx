@@ -23,18 +23,29 @@ const ResultAnalysis = () => {
     return score;
   };
 
+  const calculateUnattended = () => {
+    let unattended = 0;
+    quiz.questions.forEach((question, index) => {
+      if (responses[index] === 'unattended') {
+        unattended += 1;
+      }
+    });
+    return unattended;
+  };
+
   const score = calculateScore();
   const totalQuestions = quiz.questions.length;
+  const unattended = calculateUnattended();
   const correctAnswers = score;
-  const wrongAnswers = totalQuestions - correctAnswers;
+  const wrongAnswers = totalQuestions - correctAnswers - unattended;
 
   const data = {
     labels: ['Correct', 'Wrong'],
     datasets: [
       {
-        data: [correctAnswers, wrongAnswers],
-        backgroundColor: ['#4CAF50', '#F44336'],
-        hoverBackgroundColor: ['#66BB6A', '#EF5350'],
+        data: [correctAnswers, wrongAnswers,unattended],
+        backgroundColor: ['#4CAF50', '#F44336', '#FFC107'],
+        hoverBackgroundColor: ['#66BB6A', '#EF5350', '#FFD54F'],
       },
     ],
   };
@@ -87,7 +98,7 @@ const ResultAnalysis = () => {
                 })}
               </ul>
               {/* <p className="mt-2">Your Answer: {userAnswer} {isUserAnswerCorrect ? 'is Right':''}</p> */}
-              {isUserAnswerCorrect ? <p> {userAnswer} is Correct Answer</p> : <p>Your Answer: {userAnswer}</p>}
+              {isUserAnswerCorrect ? <p> {userAnswer} is Correct Answer</p> : <p>{userAnswer === "unattended"? "Did Not Attended this question" : `Your Answer:  ${userAnswer}` }</p>}
               {!isUserAnswerCorrect && <p>Correct Answer: {question.correctOption}</p>}
             </li>
           );
@@ -98,3 +109,5 @@ const ResultAnalysis = () => {
 };
 
 export default ResultAnalysis;
+
+

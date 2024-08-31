@@ -4,7 +4,7 @@ import QuizTaking from './components/QuizTaking';
 import ResultAnalysis from './components/ResultAnalysis';
 import QuizList from './components/QuizList';
 import { Provider } from 'react-redux';
-import {store} from './store';
+import store from './store';
 
 const App = () => {
   return (
