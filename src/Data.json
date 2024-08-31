@@ -1,22 +1,328 @@
-
 {
-  "CSPM Executive Dashboard": [
+  "categories": [
     {
-      "id": 1,
-      "name": "Widget 1",
-      "text": "This is widget 1 in CSPM Executive Dashboard"
+      "id": "science",
+      "name": "Science",
+      "questions": [
+        {
+          "question": "What is the chemical symbol for water?",
+          "options": ["H2O", "O2", "CO2", "NaCl"],
+          "correctOption": "H2O"
+        },
+        {
+          "question": "What planet is known as the Red Planet?",
+          "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+          "correctOption": "Mars"
+        },
+        {
+          "question": "What gas do plants absorb from the atmosphere?",
+          "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+          "correctOption": "Carbon Dioxide"
+        },
+        {
+          "question": "What is the hardest natural substance on Earth?",
+          "options": ["Gold", "Iron", "Diamond", "Silver"],
+          "correctOption": "Diamond"
+        },
+        {
+          "question": "What is the speed of light?",
+          "options": ["300,000 km/s", "150,000 km/s", "450,000 km/s", "600,000 km/s"],
+          "correctOption": "300,000 km/s"
+        },
+        {
+          "question": "What is the chemical symbol for gold?",
+          "options": ["Au", "Ag", "Pb", "Fe"],
+          "correctOption": "Au"
+        },
+        {
+          "question": "What is the main gas found in the air we breathe?",
+          "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+          "correctOption": "Nitrogen"
+        },
+        {
+          "question": "What planet is closest to the sun?",
+          "options": ["Venus", "Earth", "Mercury", "Mars"],
+          "correctOption": "Mercury"
+        },
+        {
+          "question": "What is the chemical symbol for sodium?",
+          "options": ["Na", "S", "N", "K"],
+          "correctOption": "Na"
+        },
+        {
+          "question": "What is the largest planet in our solar system?",
+          "options": ["Earth", "Mars", "Jupiter", "Saturn"],
+          "correctOption": "Jupiter"
+        },
+        {
+          "question": "What is the powerhouse of the cell?",
+          "options": ["Nucleus", "Mitochondria", "Ribosome", "Golgi apparatus"],
+          "correctOption": "Mitochondria"
+        },
+        {
+          "question": "What is the chemical symbol for iron?",
+          "options": ["Fe", "Ir", "In", "I"],
+          "correctOption": "Fe"
+        },
+        {
+          "question": "What is the most abundant gas in the Earth's atmosphere?",
+          "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+          "correctOption": "Nitrogen"
+        },
+        {
+          "question": "What is the boiling point of water?",
+          "options": ["100°C", "0°C", "50°C", "200°C"],
+          "correctOption": "100°C"
+        },
+        {
+          "question": "What is the chemical symbol for potassium?",
+          "options": ["K", "P", "Pt", "Po"],
+          "correctOption": "K"
+        }
+      ]
     },
     {
-      "id": 2,
-      "name": "Widget 2",
-      "text": "This is widget 2 in CSPM Executive Dashboard"
-    }
-  ],
-  "Security Dashboard": [
+      "id": "maths",
+      "name": "Maths",
+      "questions": [
+        {
+          "question": "What is the value of Pi?",
+          "options": ["3.14", "2.71", "1.62", "1.41"],
+          "correctOption": "3.14"
+        },
+        {
+          "question": "What is the square root of 64?",
+          "options": ["6", "7", "8", "9"],
+          "correctOption": "8"
+        },
+        {
+          "question": "What is 7 + 8?",
+          "options": ["14", "15", "16", "17"],
+          "correctOption": "15"
+        },
+        {
+          "question": "What is 12 * 12?",
+          "options": ["124", "144", "154", "164"],
+          "correctOption": "144"
+        },
+        {
+          "question": "What is 100 / 4?",
+          "options": ["20", "25", "30", "35"],
+          "correctOption": "25"
+        },
+        {
+          "question": "What is the value of e?",
+          "options": ["2.71", "3.14", "1.62", "1.41"],
+          "correctOption": "2.71"
+        },
+        {
+          "question": "What is the square root of 81?",
+          "options": ["7", "8", "9", "10"],
+          "correctOption": "9"
+        },
+        {
+          "question": "What is 9 * 9?",
+          "options": ["80", "81", "82", "83"],
+          "correctOption": "81"
+        },
+        {
+          "question": "What is 50 - 25?",
+          "options": ["20", "25", "30", "35"],
+          "correctOption": "25"
+        },
+        {
+          "question": "What is 5 * 5?",
+          "options": ["20", "25", "30", "35"],
+          "correctOption": "25"
+        },
+        {
+          "question": "What is 1000 / 10?",
+          "options": ["100", "90", "80", "70"],
+          "correctOption": "100"
+        },
+        {
+          "question": "What is 6 * 7?",
+          "options": ["40", "41", "42", "43"],
+          "correctOption": "42"
+        },
+        {
+          "question": "What is 8 * 8?",
+          "options": ["60", "62", "64", "66"],
+          "correctOption": "64"
+        },
+        {
+          "question": "What is 9 + 10?",
+          "options": ["18", "19", "20", "21"],
+          "correctOption": "19"
+        },
+        {
+          "question": "What is 15 - 5?",
+          "options": ["8", "9", "10", "11"],
+          "correctOption": "10"
+        }
+      ]
+    },
     {
-      "id": 3,
-      "name": "Widget 1",
-      "text": "This is widget 1 in Security Dashboard"
+      "id": "social",
+      "name": "Social",
+      "questions": [
+        {
+          "question": "Who was the first President of the United States?",
+          "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+          "correctOption": "George Washington"
+        },
+        {
+          "question": "What year did the American Civil War start?",
+          "options": ["1860", "1861", "1862", "1863"],
+          "correctOption": "1861"
+        },
+        {
+          "question": "Who wrote the Declaration of Independence?",
+          "options": ["George Washington", "Thomas Jefferson", "Benjamin Franklin", "John Adams"],
+          "correctOption": "Thomas Jefferson"
+        },
+        {
+          "question": "What year did the United States land on the moon?",
+          "options": ["1967", "1968", "1969", "1970"],
+          "correctOption": "1969"
+        },
+        {
+          "question": "Who was the 16th President of the United States?",
+          "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+          "correctOption": "Abraham Lincoln"
+        },
+        {
+          "question": "What year did World War II end?",
+          "options": ["1944", "1945", "1946", "1947"],
+          "correctOption": "1945"
+        },
+        {
+          "question": "Who was the first man to walk on the moon?",
+          "options": ["Buzz Aldrin", "Neil Armstrong", "Michael Collins", "Yuri Gagarin"],
+          "correctOption": "Neil Armstrong"
+        },
+        {
+          "question": "What year did the Berlin Wall fall?",
+          "options": ["1987", "1988", "1989", "1990"],
+          "correctOption": "1989"
+        },
+        {
+          "question": "Who was the first female Prime Minister of the United Kingdom?",
+          "options": ["Margaret Thatcher", "Theresa May", "Angela Merkel", "Indira Gandhi"],
+          "correctOption": "Margaret Thatcher"
+        },
+        {
+          "question": "What year did the Titanic sink?",
+          "options": ["1910", "1911", "1912", "1913"],
+          "correctOption": "1912"
+        },
+        {
+          "question": "Who was the first President of the United States?",
+          "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+          "correctOption": "George Washington"
+        },
+        {
+          "question": "What year did the American Civil War end?",
+          "options": ["1864", "1865", "1866", "1867"],
+          "correctOption": "1865"
+        },
+        {
+          "question": "Who was the first President of the United States?",
+          "options": ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+          "correctOption": "George Washington"
+        },
+        {
+          "question": "What year did the American Civil War start?",
+          "options": ["1860", "1861", "1862", "1863"],
+          "correctOption": "1861"
+        },
+        {
+          "question": "Who wrote the Declaration of Independence?",
+          "options": ["George Washington", "Thomas Jefferson", "Benjamin Franklin", "John Adams"],
+          "correctOption": "Thomas Jefferson"
+        }
+      ]
+    },
+    {
+      "id": "english",
+      "name": "English",
+      "questions": [
+        {
+          "question": "What is the synonym of 'happy'?",
+          "options": ["Sad", "Joyful", "Angry", "Bored"],
+          "correctOption": "Joyful"
+        },
+        {
+          "question": "What is the antonym of 'fast'?",
+          "options": ["Quick", "Slow", "Rapid", "Swift"],
+          "correctOption": "Slow"
+        },
+        {
+          "question": "What is the plural of 'child'?",
+          "options": ["Childs", "Children", "Childes", "Childrens"],
+          "correctOption": "Children"
+        },
+        {
+          "question": "What is the past tense of 'run'?",
+          "options": ["Ran", "Run", "Running", "Runned"],
+          "correctOption": "Ran"
+        },
+        {
+          "question": "What is the synonym of 'big'?",
+          "options": ["Small", "Tiny", "Large", "Little"],
+          "correctOption": "Large"
+        },
+        {
+          "question": "What is the antonym of 'hot'?",
+          "options": ["Warm", "Cold", "Cool", "Chilly"],
+          "correctOption": "Cold"
+        },
+        {
+          "question": "What is the plural of 'mouse'?",
+          "options": ["Mouses", "Mice", "Mouse", "Mices"],
+          "correctOption": "Mice"
+        },
+        {
+          "question": "What is the past tense of 'eat'?",
+          "options": ["Ate", "Eat", "Eaten", "Eating"],
+          "correctOption": "Ate"
+        },
+        {
+          "question": "What is the synonym of 'small'?",
+          "options": ["Big", "Tiny", "Large", "Huge"],
+          "correctOption": "Tiny"
+        },
+        {
+          "question": "What is the antonym of 'happy'?",
+          "options": ["Sad", "Joyful", "Angry", "Bored"],
+          "correctOption": "Sad"
+        },
+        {
+          "question": "What is the plural of 'goose'?",
+          "options": ["Gooses", "Geese", "Goose", "Geeses"],
+          "correctOption": "Geese"
+        },
+        {
+          "question": "What is the past tense of 'swim'?",
+          "options": ["Swam", "Swim", "Swimming", "Swum"],
+          "correctOption": "Swam"
+        },
+        {
+          "question": "What is the synonym of 'angry'?",
+          "options": ["Happy", "Joyful", "Mad", "Calm"],
+          "correctOption": "Mad"
+        },
+        {
+          "question": "What is the antonym of 'big'?",
+          "options": ["Small", "Tiny", "Large", "Little"],
+          "correctOption": "Small"
+        },
+        {
+          "question": "What is the plural of 'foot'?",
+          "options": ["Foots", "Feet", "Footes", "Footies"],
+          "correctOption": "Feet"
+        }
+      ]
     }
   ]
 }

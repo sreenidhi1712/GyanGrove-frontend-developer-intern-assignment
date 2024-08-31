@@ -1,9 +1,15 @@
 // src/store.js
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import data from "./Data.json"
+import data from './Data.json'; // Import Data.json
 
 const initialState = {
-  categories: data,
+  categories: data.categories, // Include categories from Data.json
+  quizzes: data.categories.map(category => ({
+    id: category.id,
+    name: category.name,
+    questions: category.questions
+  })), // Transform categories into quizzes
+  responses: {},
   searchTerm: '',
 };
 
@@ -11,37 +17,26 @@ const widgetsSlice = createSlice({
   name: 'widgets',
   initialState,
   reducers: {
+    addQuiz: (state, action) => {
+      state.quizzes.push(action.payload);
+    },
+    updateQuiz: (state, action) => {
+      const index = state.quizzes.findIndex(quiz => quiz.id === action.payload.id);
+      if (index !== -1) {
+        state.quizzes[index] = action.payload;
+      }
+    },
+    addResponse: (state, action) => {
+      const { quizId, responses } = action.payload;
+      state.responses[quizId] = responses;
+    },
     addCategory: (state, action) => {
-      const category = action.payload;
-      if (!state.categories[category]) {
-        state.categories[category] = [];
-      }
-    },
-    removeCategory: (state, action) => {
-      const category = action.payload;
-      delete state.categories[category];
-    },
-    addWidget: (state, action) => {
-      const { category, widget } = action.payload;
-      if (state.categories[category]) {
-        state.categories[category].push(widget);
-      }
-    },
-    removeWidget: (state, action) => {
-      const { category, widgetId } = action.payload;
-      state.categories[category] = state.categories[category].filter(w => w.id !== widgetId);
-    },
-    uncheckWidget: (state, action) => {
-      const { category, widgetId } = action.payload;
-      state.categories[category] = state.categories[category].filter(w => w.id !== widgetId);
-    },
-    setSearchTerm: (state, action) => {
-      state.searchTerm = action.payload;
+      state.categories.push(action.payload);
     },
   },
 });
 
-export const { addCategory, removeCategory, addWidget, removeWidget, uncheckWidget, setSearchTerm } = widgetsSlice.actions;
+export const { addQuiz, updateQuiz, addResponse ,addCategory} = widgetsSlice.actions;
 
 export const store = configureStore({
   reducer: {
