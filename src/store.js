@@ -10,6 +10,7 @@ const initialState = {
   })), // Transform categories into quizzes
   responses: {},
   results: [], // Initialize results as an empty array
+  showInstructions: true
 };
 
 const widgetsSlice = createSlice({
@@ -31,10 +32,13 @@ const widgetsSlice = createSlice({
     addResult: (state, action) => {
       state.results.push(action.payload);
     },
+    closeInstructions: (state) => {
+      state.showInstructions = false;
+    },
   },
 });
 
-export const { addQuiz, updateQuiz, addResponse, addResult } = widgetsSlice.actions;
+export const { addQuiz, updateQuiz, addResponse, addResult ,closeInstructions} = widgetsSlice.actions;
 
 const store = configureStore({
   reducer: {

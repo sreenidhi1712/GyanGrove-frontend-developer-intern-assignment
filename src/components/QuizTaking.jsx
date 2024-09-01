@@ -79,15 +79,15 @@ const QuizTaking = () => {
   const currentQuestion = quiz.questions[currentQuestionIndex];
 
   return (
-    <div className="container mx-auto p-4 bg-purple-200 min-h-screen flex flex-col items-center w-full">
+    <div className="container mx-auto p-4 bg-purple-200 min-h-screen flex flex-col items-center min-w-full">
       <h2 className="text-2xl font-bold mb-4">{quiz.name}</h2>
-      <div className="mb-4 w-full bg-white rounded-lg p-2 flex justify-center flex-col">
+      <div className="mb-4 w-full lg:w-[60%] bg-white rounded-lg p-2 flex justify-center flex-col">
         <div className="px-2 flex justify-center items-center font-semibold min-h-36 w-[99%] bg-purple-200 rounded-lg">
           <p className='text-white font-bold text-2xl'>{currentQuestion.question}</p>
         </div>
-        <div className='w-full flex flex-wrap gap-2 mt-5'>
+        <div className='w-full flex flex-wrap gap-2 mt-5 md:grid md:grid-cols-2'>
           {currentQuestion.options.map((option, optionIndex) => (
-            <div key={optionIndex} onClick={() => handleOptionChange(currentQuestionIndex, option)} className={`relative flex gap-2 h-10 w-[99%] border-2 rounded-lg items-center p-2 justify-center ${responses[currentQuestionIndex] === option ? `bg-green-100 border-green-400` : `border-slate-300 bg-white`}`}>
+            <div key={optionIndex} onClick={() => handleOptionChange(currentQuestionIndex, option)} className={`relative flex gap-2 h-10 w-full border-2 rounded-lg items-center p-2 justify-center ${responses[currentQuestionIndex] === option ? `bg-green-100 border-green-400` : `border-slate-300 bg-white`}`}>
               <label className='text-sm '>
                 {option}
               </label>
@@ -112,7 +112,7 @@ const QuizTaking = () => {
           <p className='text-center mt-2'>Time left: {timeLeft} seconds</p>
         </div>
         <button
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          className="mt-4  px-4 py-2 bg-blue-500 text-white rounded transform transition-transform "
           onClick={handleNextQuestion}
         >
           Next Question
