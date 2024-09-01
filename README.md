@@ -16,8 +16,8 @@ To get started with the Widget Dashboard project, follow these steps:
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/sreenidhi1712/AccuKnox.git
-   cd AccuKnox-Frontend-Trainee-Assessment
+   git clone https://github.com/sreenidhi1712/Bright-Champs-Assignment.git
+   cd BrightChmaps-Frontend-Internship-Assessment
 
 2. **Install dependencies:**
 
