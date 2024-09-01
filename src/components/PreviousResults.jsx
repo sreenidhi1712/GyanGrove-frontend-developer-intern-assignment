@@ -7,7 +7,7 @@ const PreviousResults = () => {
   const navigate = useNavigate();
 
   if (results.length === 0) {
-    return <p className="text-center text-white mt-10">No previous results found</p>;
+    return <p className="text-center text-3xl text-black mt-10">No previous results found</p>;
   }
 
   return (
