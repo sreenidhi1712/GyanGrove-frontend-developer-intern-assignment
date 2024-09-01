@@ -9,7 +9,7 @@ const Home = () => {
   const showInstructions = useSelector((state) => state.widgets.showInstructions);
   // const [showInstructions, setShowInstructions] = useState(true);
   return (
-    <>
+    <>z
       <div className={`fixed inset-0 bg-slate-400 bg-opacity-75 flex items-center justify-center z-10 ${showInstructions ? 'flex' : 'hidden'}`}>
         <div className="w-[90%] md:w-[70%] lg:w-[50%] bg-yellow-100 p-6 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-4 text-center">Instructions</h2>
