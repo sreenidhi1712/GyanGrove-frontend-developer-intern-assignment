@@ -13,7 +13,6 @@ const QuizTaking = () => {
   const navigate = useNavigate();
 
   const handleSubmit = useCallback(() => {
-    // const totalQuestions = quiz.questions.length;
     let totalScore = 0;
     let unattended = 0;
     let wrongAnswers = 0;
@@ -104,7 +103,13 @@ const QuizTaking = () => {
           ))}
         </div>
         <div className="m-4">
-          <p className='text-center'>Time left: {timeLeft} seconds</p>
+          <div className="relative w-full h-4 bg-gray-300 rounded">
+            <div
+              className="absolute top-0 left-0 h-4 bg-blue-500 rounded"
+              style={{ width: `${(timeLeft / 20) * 100}%` }}
+            ></div>
+          </div>
+          <p className='text-center mt-2'>Time left: {timeLeft} seconds</p>
         </div>
         <button
           className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
