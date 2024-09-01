@@ -1,4 +1,4 @@
-# Widget Dashboard
+# Quiz Application Platform
 
 Welcome to the Quiz Application project! This application enables users to efficiently take quizzes and view their results within a user-friendly environment.
 
