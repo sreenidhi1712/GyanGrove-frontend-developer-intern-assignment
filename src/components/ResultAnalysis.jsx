@@ -1,4 +1,3 @@
-
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Pie } from 'react-chartjs-2';
@@ -7,43 +6,21 @@ import 'chart.js/auto';
 const ResultAnalysis = () => {
   const { id } = useParams(); // Use useParams to get the quiz ID from the route
   const quiz = useSelector((state) => state.widgets.quizzes.find((quiz) => quiz.id === id));
-  const responses = useSelector((state) => state.widgets.responses[id]);
+  const result = useSelector((state) => state.widgets.results.find((result) => result.quizId === id));
 
-  if (!quiz || !responses) {
-    return <p>Quiz or responses not found</p>;
+  if (!quiz || !result) {
+    return <p>Quiz or results not found</p>;
   }
 
-  const calculateScore = () => {
-    let score = 0;
-    quiz.questions.forEach((question, index) => {
-      if (responses[index] === question.correctOption) {
-        score += 1;
-      }
-    });
-    return score;
-  };
-
-  const calculateUnattended = () => {
-    let unattended = 0;
-    quiz.questions.forEach((question, index) => {
-      if (responses[index] === 'unattended') {
-        unattended += 1;
-      }
-    });
-    return unattended;
-  };
-
-  const score = calculateScore();
+  const { totalScore, unattended, wrongAnswers, responses } = result;
   const totalQuestions = quiz.questions.length;
-  const unattended = calculateUnattended();
-  const correctAnswers = score;
-  const wrongAnswers = totalQuestions - correctAnswers - unattended;
+  const correctAnswers = totalScore;
 
   const data = {
-    labels: ['Correct', 'Wrong'],
+    labels: ['Correct', 'Wrong', 'Unattended'],
     datasets: [
       {
-        data: [correctAnswers, wrongAnswers,unattended],
+        data: [correctAnswers, wrongAnswers, unattended],
         backgroundColor: ['#4CAF50', '#F44336', '#FFC107'],
         hoverBackgroundColor: ['#66BB6A', '#EF5350', '#FFD54F'],
       },
@@ -71,11 +48,11 @@ const ResultAnalysis = () => {
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Quiz Results</h2>
-      <p className="mb-4">Your Score: {score} / {totalQuestions}</p>
+      <p className="mb-4">Your Score: {totalScore} / {totalQuestions}</p>
       <div className="relative w-64 h-64 mx-auto mb-4">
         <Pie data={data} options={options} />
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-2xl font-bold">{score} / {totalQuestions}</div>
+          <div className="text-2xl font-bold">{totalScore} / {totalQuestions}</div>
         </div>
       </div>
       <ul>
@@ -97,8 +74,11 @@ const ResultAnalysis = () => {
                   );
                 })}
               </ul>
-              {/* <p className="mt-2">Your Answer: {userAnswer} {isUserAnswerCorrect ? 'is Right':''}</p> */}
-              {isUserAnswerCorrect ? <p> {userAnswer} is Correct Answer</p> : <p>{userAnswer === "unattended"? "Did Not Attended this question" : `Your Answer:  ${userAnswer}` }</p>}
+              {isUserAnswerCorrect ? (
+                <p>{userAnswer} is Correct Answer</p>
+              ) : (
+                <p>{userAnswer === 'unattended' ? 'Did Not Attend this question' : `Your Answer: ${userAnswer}`}</p>
+              )}
               {!isUserAnswerCorrect && <p>Correct Answer: {question.correctOption}</p>}
             </li>
           );

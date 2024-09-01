@@ -6,6 +6,7 @@ import QuizList from './components/QuizList';
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from './components/Home';
+import PreviousResults from './components/PreviousResults';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/results/:id" element={<ResultAnalysis />} />
         <Route path="/quizlist" element={<QuizList />} />
         <Route path="/" element={<Home/>} />
+        <Route path="/previous-results" element={<PreviousResults />} />
       </Routes>
     </Router>
     </Provider>

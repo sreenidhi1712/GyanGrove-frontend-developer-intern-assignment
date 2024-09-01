@@ -12,7 +12,7 @@ const Home = () => {
         <div className='w-[90%] h-28 border-slate-100 border-2 bg-red-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/create')}>
               <p className='text-2xl text-white font-bold'>Create Your Own Quiz </p>
         </div>
-        <div className='w-[90%] h-28 border-slate-100 border-2 bg-blue-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/')}>
+        <div className='w-[90%] h-28 border-slate-100 border-2 bg-blue-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/previous-results')}>
               <p className='text-2xl text-white font-bold'>View Your past Results </p>
         </div>
       </div>
