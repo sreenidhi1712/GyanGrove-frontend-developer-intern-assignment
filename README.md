@@ -17,6 +17,7 @@ To get started with the Widget Dashboard project, follow these steps:
 
    ```bash
    git clone https://github.com/sreenidhi1712/Bright-Champs-Assignment.git
+ 
    cd Bright-Champs-Frontend-Intern-Assessment
 
 2. **Install dependencies:**
