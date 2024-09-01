@@ -1,6 +1,6 @@
 # Widget Dashboard
 
-Welcome to the Widget Dashboard project! This application enables users to efficiently manage and interact with widgets within a customizable dashboard environment.
+Welcome to the Quiz Application project! This application enables users to efficiently take quizzes and view their results within a user-friendly environment.
 
 ## Technologies Used
 
@@ -17,7 +17,7 @@ To get started with the Widget Dashboard project, follow these steps:
 
    ```bash
    git clone https://github.com/sreenidhi1712/Bright-Champs-Assignment.git
-   cd BrightChmaps-Frontend-Internship-Assessment
+   cd Bright-Champs-Frontend-Intern-Assessment
 
 2. **Install dependencies:**
 
