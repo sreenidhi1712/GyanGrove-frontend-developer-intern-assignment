@@ -56,29 +56,31 @@ const QuizTaking = () => {
   const currentQuestion = quiz.questions[currentQuestionIndex];
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-purple-200 min-h-screen flex flex-col items-center w-full">
       <h2 className="text-2xl font-bold mb-4">{quiz.name}</h2>
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">{currentQuestion.question}</h3>
-        <ul>
+      <div className="mb-4 w-full bg-white rounded-lg p-2 flex justify-center flex-col">
+        <div className="px-2 flex justify-center items-center font-semibold min-h-36 w-[99%] bg-purple-200 rounded-lg"><p className='text-white font-bold text-2xl'>{currentQuestion.question}</p></div>
+        <div className='w-full flex flex-wrap gap-2 mt-5'>
           {currentQuestion.options.map((option, optionIndex) => (
-            <li key={optionIndex}>
-              <label>
+            <div key={optionIndex} onClick={() => handleOptionChange(currentQuestionIndex, option)} className={`relative flex  gap-2 h-10 w-[99%] border-2  rounded-lg items-center p-2 justify-center ${responses[currentQuestionIndex] === option ? `bg-green-100 border-green-400`: `border-slate-300 bg-white`}`}>
+              <label className='text-sm '>
+              {option}
+              </label>
                 <input
                   type="radio"
                   name={`question-${currentQuestionIndex}`}
                   value={option}
                   checked={responses[currentQuestionIndex] === option}
                   onChange={() => handleOptionChange(currentQuestionIndex, option)}
+                  className='absolute right-2'
+                 
                 />
-                {option}
-              </label>
-            </li>
+                
+            </div>
           ))}
-        </ul>
-      </div>
-      <div className="mb-4">
-        <p>Time left: {timeLeft} seconds</p>
+        </div>
+        <div className="m-4">
+        <p className='text-center'>Time left: {timeLeft} seconds</p>
       </div>
       <button
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
@@ -86,8 +88,12 @@ const QuizTaking = () => {
       >
         Next Question
       </button>
+      </div>
     </div>
   );
 };
 
 export default QuizTaking;
+
+
+

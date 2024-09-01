@@ -1,22 +1,20 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="text-4xl font-bold mb-8">Online Quiz Platform</h1>
-      <div className="space-x-4">
-        <Link
-          to="/create"
-          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-        >
-          Create Quiz
-        </Link>
-        <Link
-          to="/quizlist"
-          className="px-6 py-2 bg-green-500 text-white rounded hover:bg-green-700"
-        >
-          Take Quiz
-        </Link>
+    <div className="flex flex-col items-center justify-center h-screen w-full bg-purple-300">
+      <h1 className="text-4xl font-bold mb-8 text-center mt-10 text-white">Online Quiz Platform</h1>
+      <div className="w-full flex flex-wrap justify-center gap-3">
+        <div className='w-[90%] h-28 border-slate-100 border-2 bg-green-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/quizlist')}>
+              <p className='text-2xl text-white font-bold'> Take Quiz</p>
+        </div>
+        <div className='w-[90%] h-28 border-slate-100 border-2 bg-red-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/create')}>
+              <p className='text-2xl text-white font-bold'>Create Your Own Quiz </p>
+        </div>
+        <div className='w-[90%] h-28 border-slate-100 border-2 bg-blue-400 flex justify-center items-center rounded-xl' onClick={()=>navigate('/')}>
+              <p className='text-2xl text-white font-bold'>View Your past Results </p>
+        </div>
       </div>
     </div>
   );
