@@ -135,7 +135,7 @@ const QuizCreation = () => {
           </div>
           {validationMessages[questionIndex] && (
             <p className="text-red-500 text-xs italic">
-              {validationMessages[questionIndex]}
+              {isSaveDisabled ? validationMessages[questionIndex] : ''}
             </p>
           )}
         </div>
@@ -149,7 +149,7 @@ const QuizCreation = () => {
       <button
         onClick={handleSaveQuiz}
         disabled={isSaveDisabled}
-        className={`bg-green-500 text-white p-2 rounded ${
+        className={`bg-green-500 text-white p-2 rounded ml-5 ${
           isSaveDisabled ? 'opacity-50 cursor-not-allowed' : ''
         }`}
       >
@@ -160,3 +160,4 @@ const QuizCreation = () => {
 };
 
 export default QuizCreation;
+
