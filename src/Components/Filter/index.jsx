@@ -14,7 +14,7 @@ const FilterControls = () => {
       <select
         value={filterCategory}
         onChange={(e) => dispatch(setFilterCategory(e.target.value))}
-        className="border px-2 py-1"
+        className="border px-2 py-1 rounded-lg"
       >
         {categoryList.map((category) => (
         <option key={category} value={category}>

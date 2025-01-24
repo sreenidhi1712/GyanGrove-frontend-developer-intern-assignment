@@ -18,12 +18,13 @@ const AddEditForm = () => {
     setName('');
     setCategory('');
     setQuantity('');
+    setPrice('');
   };
 
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <h2 className="text-xl font-semibold mb-2">Add Item</h2>
+    <form onSubmit={handleSubmit} className="space-y-4 bg-white p-4 rounded-xl shadow-xl"> 
+      <h2 className="text-xl font-bold mb-2 ">Add Item</h2>
       <div>
         <label className="block mb-1">Name</label>
         <input
@@ -32,6 +33,7 @@ const AddEditForm = () => {
           onChange={(e) => setName(e.target.value)}
           className="w-full border px-2 py-1"
           placeholder="Item name"
+          required
         />
       </div>
       <div>
@@ -42,16 +44,18 @@ const AddEditForm = () => {
           onChange={(e) => setCategory(e.target.value)}
           className="w-full border px-2 py-1"
           placeholder="Item category"
+          required
         />
       </div>
       <div>
         <label className="block mb-1">Price</label>
         <input
-          type="text"
+          type="number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           className="w-full border px-2 py-1"
           placeholder="Item name"
+          required
         />
       </div>
       <div>
@@ -62,10 +66,11 @@ const AddEditForm = () => {
           onChange={(e) => setQuantity(e.target.value)}
           className="w-full border px-2 py-1"
           placeholder="Item quantity"
+          required
         />
       </div>
       <div className="flex space-x-4">
-        <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded">
+        <button type="submit" className="px-4 py-2 bg-green-400 rounded-lg text-white font-bold">
         Add Item
         </button>
       </div>

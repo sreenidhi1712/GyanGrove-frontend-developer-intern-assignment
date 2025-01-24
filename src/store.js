@@ -5,7 +5,6 @@ const initialState = {
   items: [], // Array of inventory items
   filterCategory: 'All', // For filtering items
   categoryList: ['All'], // List of categories
-  sortBy: null, // For sorting items
 };
 
 const inventorySlice = createSlice({
@@ -14,7 +13,10 @@ const inventorySlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
-    state.categoryList.push(action.payload.category);
+      if(!state.categoryList.includes(action.payload.category)){
+        state.categoryList.push(action.payload.category);
+      }
+
     },
     updateItem: (state, action) => {
       const { id, updatedData } = action.payload;
@@ -26,9 +28,6 @@ const inventorySlice = createSlice({
     },
     setFilterCategory: (state, action) => {
       state.filterCategory = action.payload;
-    },
-    setSortBy: (state, action) => {
-      state.sortBy = action.payload;
     },
     setCategoryList: (state,action) => {
       const {oldcategoryName,newcategoryName} = action.payload;
@@ -44,7 +43,7 @@ const inventorySlice = createSlice({
   },
 });
 
-export const { addItem, updateItem, deleteItem, setFilterCategory, setSortBy ,setCategoryList} = inventorySlice.actions;
+export const { addItem, updateItem, deleteItem, setFilterCategory ,setCategoryList} = inventorySlice.actions;
 
 const store = configureStore({
   reducer: {

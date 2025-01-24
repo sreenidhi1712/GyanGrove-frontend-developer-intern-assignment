@@ -1,6 +1,6 @@
 // src/components/InventoryTable.jsx
 import React, { useState } from 'react';
-import { deleteItem, setSortBy, updateItem ,setCategoryList} from '../../store';
+import { deleteItem, updateItem ,setCategoryList} from '../../store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const InventoryTable = () => {
@@ -35,8 +35,8 @@ setEditRowId(null);
     setEditData({ name: product.name, price: product.price, category: product.category, quantity: product.quantity });
   };
   return (
-    <div className="overflow-x-auto mt-10">
-      <table className="table-auto w-full border-collapse border border-gray-200">
+    <div className="overflow-x-auto mt-10 rounded-lg  shadow-lg">
+      <table className="table-auto w-full rounded-lg border-collapse border border-gray-100">
         <thead className="bg-gray-200">
           <tr>
             <th className="px-4 py-2">Name</th>
@@ -44,12 +44,6 @@ setEditRowId(null);
             <th className="px-4 py-2">Price</th>
             <th className="px-4 py-2">
               Quantity
-              {/* <button
-                onClick={() => dispatch(setSortBy('quantity'))}
-                className="ml-2 text-sm text-blue-500 underline"
-              >
-                Sort
-              </button> */}
             </th>
             <th className="px-4 py-2">Actions</th>
           </tr>
@@ -58,44 +52,48 @@ setEditRowId(null);
           {sortedItems.map((item) => (
             <tr
               key={item.id}
-              className={item.quantity < 10 ? 'bg-red-100' : ''}
+              className={item.quantity < 10 ? 'bg-red-100 border-2 border-red-200' : ''}
             >
              {editRowId === item.id ? (
                 <>
-                <td>
+                <td className=' border px-4 py-2'>
                   <input
                     type="text"
                     name="name"
                     value={editData.name}
                     onChange={handleInputChange}
+                    className='  w-full'
                   />
                 </td>
-                <td>
+                <td className='border px-4 py-2'>
                   <input
                     type="text"
                     name="category"
                     value={editData.category}
                     onChange={handleInputChange}
+                    className=' w-full'
                   />
                 </td>
-                <td>
+                <td className=' border px-4 py-2'>
                   <input
                     type="number"
                     name="price"
                     value={editData.price}
                     onChange={handleInputChange}
+                      className=' w-full'
                   />
                 </td>
-                <td>
+                <td className=' border px-4 py-2'>
                   <input
                     type="number"
                     name="quantity"
                     value={editData.quantity}
                     onChange={handleInputChange}
+                      className=' w-full '
                   />
                 </td>
-                <td>
-                  <button className='p-2 bg-green-400 font-bold text-white' onClick={() => {
+                <td className='flex justify-center items-center border px-4 py-2'>
+                  <button className='px-2 py-1 bg-green-400 font-bold text-white rounded-lg' onClick={() => {
                     handleSaveClick(item)
                   }}
                     >Save</button>
@@ -107,12 +105,14 @@ setEditRowId(null);
 <>
 <td className="border px-4 py-2">{item.name}</td>
               <td className="border px-4 py-2">{item.category}</td>
-              <td className="border px-4 py-2">{item.price}</td>
-              <td className="border px-4 py-2">{item.quantity}</td>
-              <td className="border px-4 py-2">
-                <button className="text-blue-500" onClick={()=>handleEditClick(item)}>Edit</button>
+              <td className="border px-4 py-2">Rs {item.price}</td>
+              <td className="border px-4 py-2 ">
+                {item.quantity} {item.quantity < 10 && <span className="text-red-500 font-bold text-xs border-2 border-red-300 rounded-lg p-1 ml-5">Low Stock</span>}
+              </td>
+              <td className="border px-4 py-2 flex items-center justify-evenly">
+                <button className="text-white bg-blue-500 rounded-lg font-bold px-3 py-1" onClick={()=>handleEditClick(item)}>Edit</button>
                 <button
-                  className="ml-4 text-red-500"
+                  className="text-white bg-red-500 rounded-lg font-bold px-3 py-1"
                   onClick={() => dispatch(deleteItem(item.id))}
                 >
                   Delete
