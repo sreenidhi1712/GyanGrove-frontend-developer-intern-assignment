@@ -1,48 +1,54 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import data from './Data.json'; // Import Data.json
+// import data from './Data.json'; // Import Data.json
 
 const initialState = {
-  categories: data.categories, // Include categories from Data.json
-  quizzes: data.categories.map(category => ({
-    id: category.id, // Generate a unique ID for each quiz
-    name: category.name,
-    questions: category.questions
-  })), // Transform categories into quizzes
-  responses: {},
-  results: [], // Initialize results as an empty array
-  showInstructions: true
+  items: [], // Array of inventory items
+  filterCategory: 'All', // For filtering items
+  categoryList: ['All'], // List of categories
+  sortBy: null, // For sorting items
 };
 
-const widgetsSlice = createSlice({
-  name: 'widgets',
+const inventorySlice = createSlice({
+  name: 'inventory',
   initialState,
   reducers: {
-    addQuiz: (state, action) => {
-      state.quizzes.push(action.payload);
+    addItem: (state, action) => {
+      state.items.push(action.payload);
+    state.categoryList.push(action.payload.category);
     },
-    updateQuiz: (state, action) => {
-      const index = state.quizzes.findIndex(quiz => quiz.id === action.payload.id);
-      if (index !== -1) {
-        state.quizzes[index] = action.payload;
+    updateItem: (state, action) => {
+      const { id, updatedData } = action.payload;
+      const index = state.items.findIndex((item) => item.id === id);
+      if (index >= 0) state.items[index] = { ...state.items[index], ...updatedData };
+    },
+    deleteItem: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    setFilterCategory: (state, action) => {
+      state.filterCategory = action.payload;
+    },
+    setSortBy: (state, action) => {
+      state.sortBy = action.payload;
+    },
+    setCategoryList: (state,action) => {
+      const {oldcategoryName,newcategoryName} = action.payload;
+      if(oldcategoryName === newcategoryName){
+        console.log('Category already exists');
       }
-    },
-    addResponse: (state, action) => {
-      state.responses[action.payload.quizId] = action.payload.responses;
-    },
-    addResult: (state, action) => {
-      state.results.push(action.payload);
-    },
-    closeInstructions: (state) => {
-      state.showInstructions = false;
+      else{
+        state.categoryList = state.categoryList.filter((category) => category !== oldcategoryName);
+        state.categoryList.push(newcategoryName);
+      }
+    
     },
   },
 });
 
-export const { addQuiz, updateQuiz, addResponse, addResult ,closeInstructions} = widgetsSlice.actions;
+export const { addItem, updateItem, deleteItem, setFilterCategory, setSortBy ,setCategoryList} = inventorySlice.actions;
 
 const store = configureStore({
   reducer: {
-    widgets: widgetsSlice.reducer,
+    inventory: inventorySlice.reducer,
   },
 });
 
