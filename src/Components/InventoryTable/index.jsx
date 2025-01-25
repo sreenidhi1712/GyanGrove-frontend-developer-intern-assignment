@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const InventoryTable = () => {
   const dispatch = useDispatch();
-  const { items, filterCategory, sortBy } = useSelector(
+  const { items, filterCategory } = useSelector(
     (state) => state.inventory
   );
   const [editRowId, setEditRowId] = useState(null);
@@ -16,21 +16,25 @@ const InventoryTable = () => {
     quantity: "",
   });
 
+
+  //filtering the items based on category
   const filteredItems =
     filterCategory === "All"
       ? items
       : items.filter((item) => item.category === filterCategory);
 
+  //sorting the items based on quantity in descending order
   const sortedItems = [...filteredItems].sort((a, b) => {
-    if (sortBy === "quantity") return a.quantity - b.quantity;
-    return 0;
+          return b.quantity - a.quantity;
   });
 
+  //function to handle the input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEditData((prev) => ({ ...prev, [name]: value }));
   };
 
+  //function to handle the save click
   const handleSaveClick = (item) => {
     dispatch(updateItem({ id: editRowId, updatedData: editData }));
     dispatch(
@@ -42,8 +46,9 @@ const InventoryTable = () => {
     setEditRowId(null);
   };
 
+  //function to handle the edit click
   const handleEditClick = (product) => {
-    setEditRowId(product.id);
+    setEditRowId(product.name);
     setEditData({
       name: product.name,
       price: product.price,
@@ -59,20 +64,21 @@ const InventoryTable = () => {
             <th className="text-gray-500 px-4 py-2">Name</th>
             <th className=" text-gray-500 px-4 py-2">Category</th>
             <th className=" text-gray-500 px-4 py-2">Price</th>
-            <th className="text-gray-500 px-4 py-2">Quantity</th>
-            {editRowId === null && (
+            <th className="text-gray-500 px-4 py-2">Quantity(desc)</th>
               <th className="text-gray-500 px-4 py-2">status</th>
-            )}
             <th className="text-gray-500 px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
+          {/* items are sorted based on quantity in descreasing order*/}
           {sortedItems.map((item) => item.quantity > 0 &&  (
+            // editing the particular item in the table
+             // highlighting the row if quantity is less than 10
             <tr
-              key={item.id}
+              key={item.name}
               className={item.quantity < 10 ? "bg-red-100 " : ""}
             >
-              {editRowId === item.id ? (
+              {editRowId === item.name ? (
                 <>
                   <td className="p-2 border-2">
                     <input
@@ -80,6 +86,7 @@ const InventoryTable = () => {
                       name="name"
                       value={editData.name}
                       onChange={handleInputChange}
+                     
                       className={
                        ` ${item.quantity < 10 ? "bg-red-100 " : "bg-inherit"} `
                       }
@@ -119,6 +126,10 @@ const InventoryTable = () => {
                     />
                   </td>
 
+                  <td>
+                 
+                  </td>
+
                   <td className="text-center  px-4 py-2">
                     <button
                       className="px-2 py-1 bg-green-400 font-bold text-white rounded-lg"
@@ -131,7 +142,9 @@ const InventoryTable = () => {
                   </td>
                 </>
               ) : (
+                //displaying the items in the table
                 <>
+              
                   <td className="font-semibold px-4 py-2 text-center">
                     {item.name}
                   </td>
@@ -144,6 +157,8 @@ const InventoryTable = () => {
                   <td className="font-semibold px-4 py-2 text-center">
                     {item.quantity}
                   </td>
+
+                  {/* showing stock status */}
                   <td
                     className={` ${
                       item.quantity >= 10 ? "text-green-500 " : "text-red-500"
@@ -160,12 +175,14 @@ const InventoryTable = () => {
                     </span>
                   </td>
                   <td className=" px-4 py-2 flex items-center justify-evenly gap-1">
+                    {/* edit the particular item in a row */}
                     <button
                       className="text-white bg-blue-500 rounded-lg font-bold px-3 py-1"
                       onClick={() => handleEditClick(item)}
                     >
                       Edit
                     </button>
+                    {/* delete the particular item */}
                     <button
                       className="text-white bg-red-500 rounded-lg font-bold px-3 py-1"
                       onClick={() => dispatch(deleteItem(item))}

@@ -1,4 +1,3 @@
-// src/components/AddEditForm.jsx
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../store";
@@ -10,8 +9,7 @@ const AddEditForm = () => {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
 
-  // Populate form fields when editing an item
-
+//add item to the store
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
