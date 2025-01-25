@@ -24,7 +24,8 @@ const inventorySlice = createSlice({
       if (index >= 0) state.items[index] = { ...state.items[index], ...updatedData };
     },
     deleteItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.items = state.items.filter((item) => item.name !== action.payload.name);
+      state.categoryList = state.categoryList.filter((category) => category !== action.payload.category);
     },
     setFilterCategory: (state, action) => {
       state.filterCategory = action.payload;

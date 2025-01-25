@@ -10,7 +10,7 @@ const FilterControls = () => {
 
   return (
     <div className="mb-4">
-      <label className="block mb-1">Filter by Category</label>
+      <label className="block mb-1 font-bold">Filter by Category</label>
       <select
         value={filterCategory}
         onChange={(e) => dispatch(setFilterCategory(e.target.value))}
