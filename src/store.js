@@ -35,8 +35,20 @@ const inventorySlice = createSlice({
 
     // Delete the item from the store
     deleteItem: (state, action) => {
-      state.items = state.items.filter((item) => item.name !== action.payload.name);
-      state.categoryList = state.categoryList.filter((category) => category !== action.payload.category);
+      const productToDelete = action.payload;
+  
+      // Delete the item from the items list
+      state.items = state.items.filter((item) => item.name !== productToDelete.name);
+      
+      // Check if the category is still used by other products
+      const remainingProductsInCategory = state.items.filter((item) => item.category === productToDelete.category);
+      
+      // If no products are left in the category, remove the category from the category list
+      if (remainingProductsInCategory.length === 0) {
+        state.categoryList = state.categoryList.filter((category) => category !== productToDelete.category);
+      }
+      
+      // Reset the filter category to 'All'
       state.filterCategory = 'All';
     },
 
